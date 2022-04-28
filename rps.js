@@ -1,6 +1,4 @@
 const choices = ['ROCK', 'PAPER', 'SCISSORS'];
-const playerSelection = prompt('Rock, Paper, or Scissors?',);
-const computerSelection = computerPlay();
 
 function computerPlay() {
     let rand = Math.floor(Math.random() * 3); //random from 0-2
@@ -52,10 +50,26 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
-    let score = 0;
+    //initialize scores
+    let playerScore = 0;
+    let computerScore = 0;
+
+    //loop through 5 times, prompting and creating scores each time
     for (let i = 0; i < 5; i++){
-        console.log(playRound(() => prompt('Rock, Paper, or Scissors?'), computerSelection));
-        console.log(playerSelection);
-        console.log(computerSelection);
+        result = playRound(prompt('Rock, Paper, or Scissors?'), computerPlay())
+        console.log(result);
+
+        //if 5th character is l, then lose and comp gains point
+        //else player gains one if 5th character is w
+        if (result.charAt(4) === 'l') {
+            computerScore++;
+        } else if (result.charAt(4) === 'w') {
+            playerScore++
+        };
+        console.log(`playerScore = ${playerScore}`);
+        console.log(`computerScore = ${computerScore}`);
     }
+
+    //return player wins if player score > computer score, comp wins if not.
+    return playerScore > computerScore ? 'Player Wins!' : 'Computer Wins!';
 }
