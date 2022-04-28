@@ -1,2 +1,2 @@
 # odin-rps
-Rock Paper Scissors Project for TOP
+Rock Paper Scissors Project for TOP Foundations
