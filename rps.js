@@ -3,7 +3,7 @@ const playerSelection = prompt('Rock, Paper, or Scissors?',);
 const computerSelection = computerPlay();
 
 function computerPlay() {
-    let rand = Math.floor(Math.random()* 3); //random from 0-2
+    let rand = Math.floor(Math.random() * 3); //random from 0-2
     return choices[rand]; //choose random index from choices
 }
 
@@ -13,13 +13,13 @@ function playRound(playerSelection, computerSelection) {
     computerSelection = computerSelection.toUpperCase();
 
     //check if player choice is valid
-    if (!choices.includes(playerSelection)) {return 'invalid entry!'};
+    if (!choices.includes(playerSelection)) { return 'invalid entry!' };
 
     //if  choices are the same, tie
-    if (playerSelection === computerSelection) {return 'Tie!'}
+    if (playerSelection === computerSelection) { return 'Tie!' }
 
     //show victory/defeats dependent on player/comp choices
-    switch (playerSelection) { 
+    switch (playerSelection) {
         case 'ROCK':
             switch (computerSelection) {
                 case 'PAPER': {
@@ -51,5 +51,11 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+    let score = 0;
+    for (let i = 0; i < 5; i++){
+        console.log(playRound(() => prompt('Rock, Paper, or Scissors?'), computerSelection));
+        console.log(playerSelection);
+        console.log(computerSelection);
+    }
+}
