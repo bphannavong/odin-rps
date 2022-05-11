@@ -5,9 +5,9 @@ function computerPlay() {
     return choices[rand]; //choose random index from choices
 }
 
-function playRound(e) {
+function playRound(playerSelection) {
     //change both selections to uppercase for case sensitivity
-    const playerSelection = e.target.id.toUpperCase();
+    playerSelection = playerSelection.toUpperCase();
     const computerSelection = computerPlay().toUpperCase();
 
     //check if player choice is valid
@@ -49,6 +49,42 @@ function playRound(e) {
     }
 }
 
+const playerChoice = document.querySelectorAll('.playerChoice');
+const scoreBoard = document.querySelector('.score-board');
+const message = document.createElement('div');
+const score = document.createElement('div');
+playerChoice.forEach(btn => btn.addEventListener('click', updateScore));
+
+message.textContent = playRound();
+scoreBoard.appendChild(message);
+let playerScore = 0;
+let computerScore = 0;
+score.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
+scoreBoard.appendChild(score);
+
+function updateScore(playerScore, computerScore) {
+    
+    score.textContent = `Player: ${playerScore} Computer: ${computerScore}`; 
+}
+
+function game (e) {
+
+}
+//if 5th character is l, then lose and comp gains point
+//else player gains one if 5th character is w
+while (playerScore < 5 && computerScore < 5) {
+    result = playRound;
+    if (result.charAt(4) === 'l') {
+        computerScore++;
+    } else if (result.charAt(4) === 'w') {
+        playerScore++
+    };
+    score.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
+}
+
+
+
+
 // function game() {
 //     //initialize scores
 //     let playerScore = 0;
@@ -70,29 +106,3 @@ function playRound(e) {
 //     //return player wins if player score > computer score, comp wins if not.
 //     return playerScore > computerScore ? 'Player Wins!' : 'Computer Wins!';
 // }
-
-const playerChoice = document.querySelectorAll('.playerChoice');
-let playerSelection;
-
-playerChoice.forEach(btn => btn.addEventListener('click', function (e) {
-    playerSelection = playRound(e);
-}));
-
-const scoreBoard = document.querySelector('.score-board');
-const message = document.querySelector('.message');
-
-let playerScore = 0;
-let computerScore = 0;
-message.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
-
-//if 5th character is l, then lose and comp gains point
-//else player gains one if 5th character is w
-while (playerScore < 5 && computerScore < 5) {
-    result = playerSelection;
-    if (result.charAt(4) === 'l') {
-        computerScore++;
-    } else if (result.charAt(4) === 'w') {
-        playerScore++
-    };
-    message.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
-}
