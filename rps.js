@@ -5,10 +5,10 @@ function computerPlay() {
     return choices[rand]; //choose random index from choices
 }
 
-function playRound(playerSelection, computerSelection) {
+function playRound(e) {
     //change both selections to uppercase for case sensitivity
-    playerSelection = playerSelection.toUpperCase();
-    computerSelection = computerSelection.toUpperCase();
+    const playerSelection = e.target.id.toUpperCase();
+    const computerSelection = computerPlay().toUpperCase();
 
     //check if player choice is valid
     if (!choices.includes(playerSelection)) { return 'invalid entry!' };
@@ -49,27 +49,31 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game() {
-    //initialize scores
-    let playerScore = 0;
-    let computerScore = 0;
+// function game() {
+//     //initialize scores
+//     let playerScore = 0;
+//     let computerScore = 0;
 
-    //loop through 5 times, prompting and creating scores each time
-    for (let i = 0; i < 5; i++){
-        result = playRound(prompt('Rock, Paper, or Scissors?'), computerPlay())
-        console.log(result);
+//     //loop through 5 times, prompting and creating scores each time
+//     // for (let i = 0; i < 5; i++){
+//     //     result = playRound(prompt('Rock, Paper, or Scissors?'), computerPlay())
+//     //     console.log(result);
 
-        //if 5th character is l, then lose and comp gains point
-        //else player gains one if 5th character is w
-        if (result.charAt(4) === 'l') {
-            computerScore++;
-        } else if (result.charAt(4) === 'w') {
-            playerScore++
-        };
-        console.log(`playerScore = ${playerScore}`);
-        console.log(`computerScore = ${computerScore}`);
-    }
+//         //if 5th character is l, then lose and comp gains point
+//         //else player gains one if 5th character is w
+//         if (result.charAt(4) === 'l') {
+//             computerScore++;
+//         } else if (result.charAt(4) === 'w') {
+//             playerScore++
+//         };
+//         console.log(`playerScore = ${playerScore}`);
+//         console.log(`computerScore = ${computerScore}`);
+//     }
 
-    //return player wins if player score > computer score, comp wins if not.
-    return playerScore > computerScore ? 'Player Wins!' : 'Computer Wins!';
-}
+//     //return player wins if player score > computer score, comp wins if not.
+//     return playerScore > computerScore ? 'Player Wins!' : 'Computer Wins!';
+// //}
+
+const playerChoice = document.querySelectorAll('.playerChoice');
+playerChoice.forEach(btn => btn.addEventListener('click', playRound));
+console.log(playerChoice);
