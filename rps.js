@@ -116,26 +116,3 @@ function updateMessage (string) {
         message.textContent = 'Click on a button to reset the game!';
     }
 }
-
-
-// function game() {
-//     //initialize scores
-//     let playerScore = 0;
-//     let computerScore = 0;
-//     message.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
-
-//     result = playRound();s
-//         //if 5th character is l, then lose and comp gains point
-//         //else player gains one if 5th character is w
-//     while (playerScore < 5 && computerScore < 5){
-//         if (result.charAt(4) === 'l') {
-//             computerScore++;
-//         } else if (result.charAt(4) === 'w') {
-//             playerScore++
-//         };
-//         message.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
-//     }
-
-//     //return player wins if player score > computer score, comp wins if not.
-//     return playerScore > computerScore ? 'Player Wins!' : 'Computer Wins!';
-// }
