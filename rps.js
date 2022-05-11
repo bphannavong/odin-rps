@@ -5,7 +5,7 @@ function computerPlay() {
     return choices[rand]; //choose random index from choices
 }
 
-function playRound(playerSelection) {
+function playRound(playerSelection) { //returns message for round winner
     //change both selections to uppercase for case sensitivity
     playerSelection = playerSelection.toUpperCase();
     const computerSelection = computerPlay().toUpperCase();
@@ -49,40 +49,72 @@ function playRound(playerSelection) {
     }
 }
 
-const playerChoice = document.querySelectorAll('.playerChoice');
-const scoreBoard = document.querySelector('.score-board');
-const message = document.createElement('div');
-const score = document.createElement('div');
-playerChoice.forEach(btn => btn.addEventListener('click', updateScore));
-
-message.textContent = playRound();
-scoreBoard.appendChild(message);
+//game state = before game, during game, end game
+// -1, 0 , 1
+let gameState = -1;
 let playerScore = 0;
 let computerScore = 0;
-score.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
-scoreBoard.appendChild(score);
 
-function updateScore(playerScore, computerScore) {
-    
-    score.textContent = `Player: ${playerScore} Computer: ${computerScore}`; 
+//depending on game state, button does different things
+const playerBtn = document.querySelectorAll('.playerBtn');
+playerBtn.forEach(button => button.addEventListener('click', playGame));
+const message = document.querySelector('.message');
+const score = document.querySelector('.score');
+
+function playGame(e) {
+    let playerChoice = e.target.id;
+//if game state = before
+    if (gameState == -1) {
+        playerScore = 0;
+        computerScore = 0;
+        gameState = 0;
+    }
+    //  then start game and play a round and update score accordingly
+    //if game state = during
+    if (gameState == 0) {
+        //  if one of the score == 5 then end game state
+        if (playerScore > 4 || computerScore > 4) {
+            gameState = 1;
+            return;
+        }
+    }
+    //  then play round and update score
+        updateScore(playRound(playerChoice));
+        if (playerScore > 4 || computerScore > 4) {
+            gameState = 1;
+            return;
+        return;
+        
+    // if end game state
+    //  then button will reset game state to before game state
+    if (gameState == 1) {
+        gameState = -1;
+        return;
+    }
 }
 
-function game (e) {
 
 }
-//if 5th character is l, then lose and comp gains point
-//else player gains one if 5th character is w
-while (playerScore < 5 && computerScore < 5) {
-    result = playRound;
+function updateScore (string) { //returns winning of round
+    result = string;
     if (result.charAt(4) === 'l') {
         computerScore++;
     } else if (result.charAt(4) === 'w') {
         playerScore++
     };
     score.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
+    updateMessage(string);
 }
 
-
+function updateMessage (string) {
+    if (gameState == -1) {
+        message.textContent = 'Click on a button to start the game!';
+    } else if (gameState == 0) {
+        message.textContent = string;
+    } else if (gameState == 1) {
+        message.textContent = 'Click on a button to reset the game!';
+    }
+}
 
 
 // function game() {
