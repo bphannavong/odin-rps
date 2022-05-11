@@ -77,14 +77,15 @@ function playGame(e) {
             gameState = 1;
             return;
         }
-    }
+    
     //  then play round and update score
         updateScore(playRound(playerChoice));
         if (playerScore > 4 || computerScore > 4) {
             gameState = 1;
             return;
         return;
-        
+        }
+    }
     // if end game state
     //  then button will reset game state to before game state
     if (gameState == 1) {
@@ -94,7 +95,7 @@ function playGame(e) {
 }
 
 
-}
+
 function updateScore (string) { //returns winning of round
     result = string;
     if (result.charAt(4) === 'l') {
